@@ -14,7 +14,7 @@ const swaggerOptions = {
         description: "Local server"
       },
       {
-        url: "https://food-back.onrender.com",
+        url: "https://food-api-iljm.onrender.com",
         description: "Production (Render)"
       }
     ],
