@@ -10,12 +10,12 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:5000",
+        url: "http://localhost:5000/api",
         description: "Local server"
       },
       {
-        url: "food-api-production-3f1b.up.railway.app↗",
-        description: "Production (Render)"
+        url: "https://food-api-production-3f1b.up.railway.app/api",
+        description: "Production server"
       }
     ],
     components: {
@@ -33,9 +33,8 @@ const swaggerOptions = {
       }
     ]
   },
-  apis: ["./routes/*.js"] // routes ichidan o‘qiydi
+  apis: ["./routes/*.js"]
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
-
 export default swaggerSpec;
