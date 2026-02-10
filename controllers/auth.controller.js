@@ -10,7 +10,9 @@ export const register = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   const exist = await User.findOne({ email });
-  if (exist) throw new Error("User already exists");
+  if (exist) {
+    return res.status(409).json({ message: "User already exists" });
+  }
 
   const hashed = await bcrypt.hash(password, 10);
   const code = generateCode();
@@ -21,10 +23,14 @@ export const register = asyncHandler(async (req, res) => {
     verificationCode: code
   });
 
-  await sendEmail(email, "Verify email", `Your code: ${code}`);
-
+  // 🔥 AVVAL RESPONSE
   res.status(201).json({ message: "Registered. Check email" });
+
+  // 🔥 KEYIN EMAIL (background)
+  sendEmail(email, "Verify email", `Your code: ${code}`)
+    .catch(err => console.error("Email error:", err.message));
 });
+
 
 // VERIFY EMAIL
 export const verifyEmail = asyncHandler(async (req, res) => {
