@@ -10,14 +10,13 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:5000/api",
-        description: "Local server"
+        url: "http://localhost:5000",
       },
       {
         url: "https://food-api-production-88a1.up.railway.app",
-        description: "Production server"
       }
     ],
+
     components: {
       securitySchemes: {
         BearerAuth: {
