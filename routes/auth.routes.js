@@ -1,11 +1,5 @@
 import express from "express";
-import {
-  register,
-  login,
-  verifyEmail,
-  forgotPassword,
-  resetPassword
-} from "../controllers/auth.controller.js";
+import { register, login } from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
@@ -13,7 +7,7 @@ const router = express.Router();
  * @swagger
  * tags:
  *   name: Auth
- *   description: Authentication & Authorization APIs
+ *   description: Authentication APIs
  */
 
 /**
@@ -40,15 +34,15 @@ const router = express.Router();
  *                 example: 12345678
  *     responses:
  *       201:
- *         description: User registered, verification code sent to email
+ *         description: Returns JWT token
  */
 router.post("/register", register);
 
 /**
  * @swagger
- * /api/auth/verify:
+ * /api/auth/login:
  *   post:
- *     summary: Verify email with code
+ *     summary: Login user
  *     tags: [Auth]
  *     requestBody:
  *       required: true
@@ -58,44 +52,16 @@ router.post("/register", register);
  *             type: object
  *             required:
  *               - email
- *               - code
+ *               - password
  *             properties:
  *               email:
  *                 type: string
- *                 example: test@gmail.com
- *               code:
+ *               password:
  *                 type: string
- *                 example: 123456
  *     responses:
  *       200:
- *         description: Email verified successfully
+ *         description: Returns JWT token
  */
-
 router.post("/login", login);
-
-/**
- * @swagger
- * /api/auth/forgot:
- *   post:
- *     summary: Send password reset code to email
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - email
- *             properties:
- *               email:
- *                 type: string
- *                 example: test@gmail.com
- *     responses:
- *       200:
- *         description: Reset code sent to email
- */
-
-
 
 export default router;
