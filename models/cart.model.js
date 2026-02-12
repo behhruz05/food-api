@@ -1,20 +1,52 @@
-// models/cart.model.js
-import mongoose from "mongoose";
+import express from "express";
+import { getCart, addToCart } from "../controllers/cart.controller.js";
+import { protect } from "../middleware/auth.middleware.js";
 
-const cartSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  },
-  items: [
-    {
-      product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product"
-      },
-      quantity: Number
-    }
-  ]
-});
+const router = express.Router();
 
-export default mongoose.model("Cart", cartSchema);
+/**
+ * @swagger
+ * tags:
+ *   name: Cart
+ */
+
+/**
+ * @swagger
+ * /api/cart:
+ *   get:
+ *     summary: Get user cart
+ *     tags: [Cart]
+ *     security:
+ *       - BearerAuth: []
+ */
+router.get("/", protect, getCart);
+
+/**
+ * @swagger
+ * /api/cart/add:
+ *   post:
+ *     summary: Add product to cart
+ *     tags: [Cart]
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - productId
+ *               - quantity
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 example: 65f8d7b12abc123456789012
+ *               quantity:
+ *                 type: number
+ *                 example: 2
+ */
+router.post("/add", protect, addToCart);
+
+export default router;
+    

@@ -9,14 +9,9 @@ const swaggerOptions = {
       description: "Food App Backend API Documentation"
     },
     servers: [
-      {
-        url: "http://localhost:5000",
-      },
-      {
-        url: "https://food-api-production-88a1.up.railway.app",
-      }
+      { url: "http://localhost:5000" },
+      { url: "https://food-api-production-88a1.up.railway.app" }
     ],
-
     components: {
       securitySchemes: {
         BearerAuth: {
@@ -25,15 +20,9 @@ const swaggerOptions = {
           bearerFormat: "JWT"
         }
       }
-    },
-    security: [
-      {
-        BearerAuth: []
-      }
-    ]
+    }
   },
   apis: ["./routes/*.js"]
 };
 
-const swaggerSpec = swaggerJSDoc(swaggerOptions);
-export default swaggerSpec;
+export default swaggerJSDoc(swaggerOptions);

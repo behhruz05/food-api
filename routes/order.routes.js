@@ -21,5 +21,15 @@ const router = express.Router();
  */
 router.get("/", protect, getOrders);
 
+/**
+ * @swagger
+ * /api/orders:
+ *   post:
+ *     summary: Create order from cart
+ *     tags: [Orders]
+ *     security:
+ *       - BearerAuth: []
+ */
+router.post("/", protect, createOrder);
 
 export default router;
