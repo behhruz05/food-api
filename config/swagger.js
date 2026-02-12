@@ -14,7 +14,7 @@ const swaggerOptions = {
         description: "Local server"
       },
       {
-        url: "https://food-api-production-3f1b.up.railway.app",
+        url: "https://food-api-production-88a1.up.railway.app",
         description: "Production server"
       }
     ],
