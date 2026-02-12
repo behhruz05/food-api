@@ -37,5 +37,37 @@ router.get("/", getRestaurants);
  */
 router.get("/:id", getRestaurantById);
 
+/**
+ * @swagger
+ * /api/restaurants:
+ *   post:
+ *     summary: Create new restaurant
+ *     tags: [Restaurants]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - image
+ *               - description
+ *               - category
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: Evos
+ *               image:
+ *                 type: string
+ *                 example: https://example.com/evos.jpg
+ *               description:
+ *                 type: string
+ *                 example: Best burgers in town
+ *               category:
+ *                 type: string
+ *                 example: 65f8d7b12abc123456789012
+ */
+router.post("/", createRestaurant);
 
 export default router;
