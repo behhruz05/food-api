@@ -6,34 +6,36 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger.js";
 
 import authRoutes from "./routes/auth.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
+import restaurantRoutes from "./routes/restaurant.routes.js";
+import productRoutes from "./routes/product.routes.js";
+import cartRoutes from "./routes/cart.routes.js";
+import orderRoutes from "./routes/order.routes.js";
 
 import errorMiddleware from "./middleware/error.middleware.js";
 import notFound from "./middleware/notFound.middleware.js";
 
-const app = express(); // 🔥 AVVAL SHU
+const app = express();
 
-// middlewares
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
+// Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/restaurants", restaurantRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 
-
-// swagger (app DAN KEYIN!)
+// Swagger
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// routes
-app.use("/api/auth", authRoutes);
-
-// not found
+// Not Found
 app.use(notFound);
 
-// error handler
+// Error handler
 app.use(errorMiddleware);
 
 export default app;
